@@ -187,7 +187,16 @@ do {
     let dictionary = try JSONDecoder().decode(ResultsWrapper.self, from: json)
     
     let people = dictionary.results
-    dump(people)
+    let firstPerson = people[0]
+    let _ = people[1]
+    let postcode = firstPerson.location.postcode
+    switch postcode {
+    case .int(let intValue):
+        print("postcode is \(intValue)")
+    case .string(let stringValue):
+        print("postcode is a \(stringValue)")
+    }
+   // dump(people)
 }catch {
     dump(error)
 }
